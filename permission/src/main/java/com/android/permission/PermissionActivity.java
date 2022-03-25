@@ -27,6 +27,7 @@ public class PermissionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission);
         overridePendingTransition(0, 0);
+        //设置成1像素
         Window window = getWindow();
         window.setGravity(Gravity.LEFT | Gravity.TOP);
         WindowManager.LayoutParams layoutParams = window.getAttributes();
@@ -42,7 +43,8 @@ public class PermissionActivity extends Activity {
         permissions = bundle.getStringArray(Constants.PERMISSIONS);
         requestCode = bundle.getInt(Constants.REQUEST_CODE);
 
-        if (permissions == null || permissions.length == 0 || requestCode == 0) {
+        //判空
+        if (permissions == null || permissions.length == 0 || requestCode == 0||mIPermission==null) {
             Log.w(TAG,11111111+"");
             finish();
             return;

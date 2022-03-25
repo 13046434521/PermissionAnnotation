@@ -53,7 +53,7 @@ public class IPermissionAspect  {
             @Override
             public void grant() {
                 try {
-                    Log.w(TAG,"grant(");
+                    Log.w(TAG,"grant");
                     point.proceed();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
@@ -63,21 +63,19 @@ public class IPermissionAspect  {
             @Override
             public void denied() {
                 Log.w(TAG,"denied");
-//                PermissionHelper.invokeAnnotation(object,PermissionCancel.class);
-                PermissionHelper.invokeAnnotation(object,PermissionDeny.class);
-                if (object instanceof Context){
-                    PermissionHelper.launchPermissionSettings((Context) object);
-                }else if (object instanceof Activity){
-                    PermissionHelper.launchPermissionSettings((Activity) object);
-                }
+                PermissionInvoke.invokeAnnotation(object,PermissionDeny.class);
+
             }
 
             @Override
             public void cancel() {
                 Log.w(TAG,"cancel");
-
-                PermissionHelper.invokeAnnotation(object,PermissionCancel.class);
-//                PermissionInvoke.invokeAnnotation(object,PermissionCancel.class);
+                PermissionInvoke.invokeAnnotation(object,PermissionCancel.class);
+                if (object instanceof Context){
+                    PermissionHelper.launchPermissionSettings((Context) object);
+                }else if (object instanceof Activity){
+                    PermissionHelper.launchPermissionSettings((Activity) object);
+                }
             }
         });
     }
@@ -90,7 +88,7 @@ public class IPermissionAspect  {
 
     @Around("permissionCancel(permission)")
     public void permissionCancleImplement(ProceedingJoinPoint point,PermissionCancel permission) throws Throwable {
-        Log.e("又去","permissionCancel");
+        point.proceed();
     }
 
     @Pointcut ("execution(@com.android.permission.anotation.PermissionDeny * *(..)) && @annotation(permission)")
@@ -101,5 +99,6 @@ public class IPermissionAspect  {
 
     @Around("permissionDeny(permission)")
     public void permissionCancleImplement(ProceedingJoinPoint point, PermissionDeny permission) throws Throwable {
+        point.proceed();
     }
 }

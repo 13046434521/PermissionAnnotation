@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d("Permission_Annotation",this.toString());
         mButton = findViewById(R.id.button);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
