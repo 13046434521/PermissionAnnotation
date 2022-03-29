@@ -14,7 +14,7 @@ import com.android.permission.anotation.PermissionDeny;
 
 public class MainActivity extends AppCompatActivity {
     private int i =0;
-    Button mButton;
+    private Button mButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,26 +24,26 @@ public class MainActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onTest();
+                onPermission();
             }
         });
     }
 
     @Permission(value = {Manifest.permission.CAMERA,Manifest.permission.INTERNET,Manifest.permission.WRITE_EXTERNAL_STORAGE},requestCode = 200)
-    public void onTest(){
-        Log.e("Permission_Annotation","Permission:onTest");
+    public void onPermission(){
+        Log.e("Permission_Annotation","Permission:onPermission");
         Toast.makeText(MainActivity.this,"Permission",Toast.LENGTH_SHORT).show();
     }
 
     @PermissionCancel
-    public void onAA(){
-        Log.e("Permission_Annotation","PermissionCancel:onAA");
+    public void onCancel(){
+        Log.e("Permission_Annotation","PermissionCancel:onCancel");
         Toast.makeText(MainActivity.this,"PermissionCancel",Toast.LENGTH_SHORT).show();
     }
 
     @PermissionDeny
-    public void onAnBB(){
-        Log.e("Permission_Annotation","PermissionDeny:onAnBB");
+    public void onDeny(){
+        Log.e("Permission_Annotation","PermissionDeny:onDeny");
         Toast.makeText(MainActivity.this,"PermissionDeny",Toast.LENGTH_SHORT).show();
     }
 }
